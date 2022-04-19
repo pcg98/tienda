@@ -2,14 +2,14 @@
 
 one:
   correo: MyString
+  telefono: MyString
+  id_rol: 1
   nombre: MyString
   apellidos: MyString
-  password: MyString
-  rol: 1
 
 two:
   correo: MyString
+  telefono: MyString
+  id_rol: 1
   nombre: MyString
   apellidos: MyString
-  password: MyString
-  rol: 1

@@ -2,16 +2,20 @@
 
 one:
   talla: MyString
+  nombre: MyString
   precio: 1.5
-  unidades: 1
+  stock: 1
+  categoria: MyString
+  sexo: MyString
+  marca: MyString
   ruta_img: MyString
-  id_cat: one
-  id_marca: one
 
 two:
   talla: MyString
+  nombre: MyString
   precio: 1.5
-  unidades: 1
+  stock: 1
+  categoria: MyString
+  sexo: MyString
+  marca: MyString
   ruta_img: MyString
-  id_cat: two
-  id_marca: two

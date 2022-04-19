@@ -1,15 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  total: 9.99
-  correo_cliente: MyString
-  estado: 1
-  fecha_creacion: 2022-04-06 10:52:41
-  fecha_fin: 2022-04-06 10:52:41
+  fecha_creaccion: 2022-04-19
+  precio_total: 1.5
+  finalizado: false
 
 two:
-  total: 9.99
-  correo_cliente: MyString
-  estado: 1
-  fecha_creacion: 2022-04-06 10:52:41
-  fecha_fin: 2022-04-06 10:52:41
+  fecha_creaccion: 2022-04-19
+  precio_total: 1.5
+  finalizado: false
