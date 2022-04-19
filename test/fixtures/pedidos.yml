@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha_creaccion: 2022-04-19 09:35:19
+  fecha_entrega: 2022-04-19
+  status: MyString
+
+two:
+  fecha_creaccion: 2022-04-19 09:35:19
+  fecha_entrega: 2022-04-19
+  status: MyString

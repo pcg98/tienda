@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  talla: MyString
+  precio_unitario: 1.5
+  unidades: 1
+  precio_linea: 1.5
+
+two:
+  talla: MyString
+  precio_unitario: 1.5
+  unidades: 1
+  precio_linea: 1.5
