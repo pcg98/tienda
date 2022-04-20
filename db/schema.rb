@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_19_074013) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_20_105936) do
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
   create_table "carritos", force: :cascade do |t|
     t.datetime "fecha_creaccion"
     t.float "precio_total"
@@ -26,11 +54,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_074013) do
     t.float "precio_unitario"
     t.integer "unidades"
     t.float "precio_linea"
-    t.integer "author_id"
     t.integer "producto_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_linea_facturas_on_author_id"
+    t.integer "carrito_id", null: false
+    t.index ["carrito_id"], name: "index_linea_facturas_on_carrito_id"
     t.index ["producto_id"], name: "index_linea_facturas_on_producto_id"
   end
 
@@ -54,7 +82,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_074013) do
     t.string "categoria"
     t.string "sexo"
     t.string "marca"
-    t.string "ruta_img"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -80,7 +107,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_074013) do
   create_table "usuarios", force: :cascade do |t|
     t.string "correo"
     t.string "telefono"
-    t.integer "id_rol"
     t.string "nombre"
     t.integer "rol_id"
     t.string "apellidos"
@@ -89,8 +115,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_074013) do
     t.index ["rol_id"], name: "index_usuarios_on_rol_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "carritos", "usuarios"
-  add_foreign_key "linea_facturas", "authors"
+  add_foreign_key "linea_facturas", "carritos"
   add_foreign_key "linea_facturas", "productos"
   add_foreign_key "pedidos", "carritos"
   add_foreign_key "pedidos", "usuarios"
