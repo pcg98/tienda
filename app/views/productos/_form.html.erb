@@ -1,0 +1,71 @@
+<%= form_for @producto do |form| %>
+
+  <%# nombre %>
+  <div>
+    <%= form.label :nombrea %>
+    <br>
+    <%= form.text_field :nombre %>
+    <% producto.errors.full_messages_for(:title).each do
+      |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <%# marca %>
+  <div>
+    <%= form.label :marca %>
+    <br>
+    <%= form.text_field :marca %>
+    <% producto.errors.full_messages_for(:marca).each do
+    |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <%# talla %>
+  <div>
+    <%= form.label :talla %>
+    <br>
+    <%= form.select :talla, ['S','M','L'] %>
+  </div>
+
+  <%# precio %>
+  <div>
+    <%= form.label :precio %>
+    <%= form.text_field :precio %>
+    <% producto.errors.full_messages_for(:precio).each do
+    |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <%# stock %>
+  <div>
+    <%= form.label :stock %>
+    <br>
+    <%= form.text_field :stock %>
+    <% producto.errors.full_messages_for(:stock).each do
+    |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <%# categoria %>
+  <div>
+    <%= form.label :categoria  %>
+    <%= form.select :categoria, ['Zapatillas','Sudaderas','Camisetas','Otros'] %>
+  </div>
+
+  <%# sexo %>
+  <div>
+    <%= form.label :sexo %>
+    <%= form.select :sexo, ['M','H','N'] %>
+  </div>
+
+  <div>
+    <%= form.file_field :image %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

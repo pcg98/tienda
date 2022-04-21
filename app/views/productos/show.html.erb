@@ -1,0 +1,21 @@
+<h1> <%= @producto.nombre %></h1>
+  <% if @producto.image.attached? %>
+    <p> <%= image_tag @producto.image %></p>
+  <% end %>
+  <p>Precio: <%= @producto.precio %></p>
+  <p>Stock: <%= @producto.stock %></p>
+  <p>Categoria: <%= @producto.categoria %></p>
+  <p>Sexo: <%= @producto.sexo %></p>
+  <div>
+    <ul>
+      <li>
+        <%= link_to "Edit", edit_producto_path(@producto) %>
+      </li>
+      <li>
+        <%= link_to "Destroy", producto_path(@producto), data: {
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?"
+        } %>
+      </li>
+    </ul>
+  </div>
