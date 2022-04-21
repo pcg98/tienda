@@ -1,0 +1,14 @@
+<h1> Productos</h1>
+  Tenemos <%= Producto.count %> productos
+<ul>
+  <% @productos.each do |producto| %>
+    <% unless producto.stock==0 %>
+      <li>
+          <%= link_to producto.nombre,producto %>
+        </a>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to "Nuevo productos", new_producto_path %>

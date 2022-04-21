@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :carrito_productos
+  resources :carritos_productos
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  resources :producto
-  root "producto#index"
+  resources :productos
+  root "productos#index"
 end

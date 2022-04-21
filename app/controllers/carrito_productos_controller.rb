@@ -1,2 +1,0 @@
-class CarritoProductosController < ApplicationController
-end
