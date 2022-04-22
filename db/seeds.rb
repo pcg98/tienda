@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+#
+admin = Rol.create(rol: "admin")
+cliente = Rol.create(rol: "cliente")
+visitante = Rol.create(rol: "visitante")
+
+Usuario.create(correo: "joralmopro@gmail.com", password: "123456", rol: admin)
+p "#{Usuario.count} usuarios creados"
+p "#{Rol.count} roles creados"

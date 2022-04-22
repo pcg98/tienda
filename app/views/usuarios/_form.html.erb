@@ -1,0 +1,19 @@
+<%= form_for @usuario, controller: 'users', action: 'create' do |f| %>
+  <%= f.label :correo %>
+  <%= f.text_field :correo %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+
+  <%= f.label :telefono %>
+  <%= f.text_field :telefono %>
+
+  <%= f.label :nombre %>
+  <%= f.text_field :nombre %>
+
+  <%= f.label :apellidos %>
+  <%= f.text_field :apellidos %>
+
+  <%= f.submit "Nuevo usuario" %>
+<% end %>
