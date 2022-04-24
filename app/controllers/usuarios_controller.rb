@@ -1,8 +1,12 @@
 class UsuariosController < ApplicationController
+  #Esto es del CanCan
+  #load_and_authorize_resource class: "Usuario"
+
   def index
     usuarios = Usuario.all
     render json: usuarios, status: :ok
   end
+
   def new
     @usuario = Usuario.new
   end
@@ -14,6 +18,12 @@ class UsuariosController < ApplicationController
     else
       render "new"
     end
+    #usuario = Usuario.new(usuario_params)
+    #if usuario.save
+      #render json: usuario, status: :ok
+    #else
+      #render json: "error", status: :unprocessable_entity
+    #end
   end
   def show
     usuario = Usuario.find(params[:id])
@@ -21,9 +31,10 @@ class UsuariosController < ApplicationController
     render json: {usuario: usuario, permisos: permisos}, status: :ok
   end
 
+
   private
-  #Estos son los atributos necesarios para insertar el productos
+  #Estos son los atributos necesarios para insertar el usuario
   def usuario_params
-    params.require(:usuario).permit(:correo,:password,:password_confirmation, :rol_id)
+    params.require(:usuario).permit(:correo, :password, :password_confirmation, :rol_id)
   end
 end

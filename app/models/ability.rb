@@ -6,15 +6,25 @@ class Ability
   def initialize(usuario)
     send("#{usuario.rol.rol}_permisos", usuario)
   end
+  #Permisos admin
   def admin_permisos(usuario)
+    #Admin puede manejar todo
     can :manage, :all
   end
-  def usuario_permisos(usuario)
+  #Permisos cliente
+  def cliente_permisos(usuario)
+    #Leer todos los productos
     can :read, Producto, :all
+    #Manejar su carrito
+    can :manage, Carrito, { usuario_id: usuario.id}
+    #Ver info y actualizar de su usuario
     can [:read, :update], Usuario, { id: usuario.id }
   end
+  #Visitantes
   def visitante_permisos(usuario)
+    #
     can :read, Producto, :all
+    can :create, Usuario, :all
   end
   def lista_de_permisos
     def usuario_params

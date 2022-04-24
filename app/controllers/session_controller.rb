@@ -8,6 +8,7 @@ class SessionController < ApplicationController
       render json: {mensaje: "Correo o Contraseña incorrectos"}, status: :unauthorized
     end
   end
+
   private
   def login_params
     params.permit(:correo, :password)

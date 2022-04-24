@@ -1,4 +1,5 @@
 class ProductosController < ApplicationController
+  load_and_authorize_resource class: "Producto"
   # GET /productos
   def index
     @productos = Producto.all
