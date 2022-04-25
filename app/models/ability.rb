@@ -4,6 +4,10 @@ class Ability
   include CanCan::Ability
 
   def initialize(usuario)
+    if ( usuario==nil )
+      usuario ||= Usuario.new
+      usuario.rol_id=1
+    end
     send("#{usuario.rol.rol}_permisos", usuario)
   end
   #Permisos admin
@@ -18,7 +22,7 @@ class Ability
     #Manejar su carrito
     can :manage, Carrito, { usuario_id: usuario.id}
     #Ver info y actualizar de su usuario
-    can [:read, :update], Usuario, { id: usuario.id }
+    can [:read, :update, :destroy], Usuario, { id: usuario.id }
   end
   #Visitantes
   def visitante_permisos(usuario)
@@ -28,7 +32,7 @@ class Ability
   end
   def lista_de_permisos
     def usuario_params
-      params.permit(:correo, :password, :rol_id)
+      params.permit(:email, :password, :rol_id)
     end
       rules.map do |rule|
       object = { acciones: rule.actions, sobre: rule.subjects.map{ |s| s.is_a?(Symbol) ? s : s.name } }

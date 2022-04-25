@@ -1,26 +1,25 @@
 class ApplicationController < ActionController::Base
-  include ManejadorDeExcepciones
   protect_from_forgery with: :null_session
 
-  rescue_from CanCan::AccessDenied do |exception|
-    render json: { mensaje: exception.message }, status: 403
-  end
+  #rescue_from CanCan::AccessDenied do |exception|
+  #render json: { mensaje: exception.message }, status: 403
+  #end
 
-  def current_user
-    if token
-      @usuario_actual ||= Usuario.find(token[:usuario_id])
-    else
-      #Si usuario actual esta vacio, rol 3
-      @usuario_actual ||= Usuario.new(rol_id: 3)
-    end
+  #Esto lo hacemos para mostrar un mensaje de error
+  # cuando intenta acceder a un sitio que no puede su user
+  rescue_from CanCan::AccessDenied do
+    flash[:error] = 'Acceso denegado!'
+    redirect_to root_url
   end
-
-  private
-  def token
-    valor = request.headers[:Authorization]
-    return if valor.blank?
-    @token ||= JsonWebToken.decode(valor.split(" ").last)
+  def current_ability
+    @current_ability ||= Ability.new(current_usuario)
   end
 
 
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nombre, :apellidos, :telefono])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:nombre, :apellidos, :telefono])
+  end
 end

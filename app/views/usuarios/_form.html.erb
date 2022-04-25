@@ -1,11 +1,26 @@
-<%= form_for @usuario, controller: 'usuario', action: 'create' do |f| %>
-  <%= f.label :correo %>
-  <%= f.text_field :correo %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-
+<%= form_with model: usuario do |f| %>
+  <% if @usuario.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @usuario.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
   <%= f.label :telefono %>
   <%= f.text_field :telefono %>
 
@@ -14,6 +29,12 @@
 
   <%= f.label :apellidos %>
   <%= f.text_field :apellidos %>
+  <div class="field">
+    <%= f.label :rol_id %>
+    <%= f.text_field :rol_id %>
+  </div>
 
-  <%= f.submit "Nuevo usuario" %>
+  <div>
+    <%= f.submit "Login" %>
+  </div>
 <% end %>

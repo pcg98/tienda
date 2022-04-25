@@ -10,5 +10,6 @@
     <% end %>
   <% end %>
 </ul>
-
-<%= link_to "Nuevo productos", new_producto_path %>
+<% if can? :create, Producto %>
+      <%= link_to "Nuevo productos", new_producto_path %>
+<% end %>

@@ -7,8 +7,13 @@
 #   Character.create(name: "Luke", movie: movies.first)
 #
 #Obtenemos rol
-cliente = Rol.find_by(rol: "cliente")
-#Lo pasamos al usuario
-Usuario.create(correo: "ejemplo2@gmail.com", password: "123456", rol: cliente)
-p "#{Usuario.count} usuarios creados"
-p "#{Rol.count} roles creados"
+r1 = Rol.find(1)
+r2 = Rol.find(2)
+r3 = Rol.find(3)
+
+u1 = Usuario.create({ nombre: 'Sally', email: 'sally@example.com', password: 'hola123', password_confirmation: 'hola123', rol_id: r1.id })
+u2 = Usuario.create({ nombre: 'Sue', email: 'sue@example.com', password: 'hola123', password_confirmation: 'hola123', rol_id: r2.id })
+u3 = Usuario.create({ nombre: 'Kev', email: 'kev@example.com', password: 'hola123', password_confirmation: 'hola123', rol_id: r2.id })
+u4 = Usuario.create({ nombre: 'Jack', email: 'jack@example.com', password: 'hola123', password_confirmation: 'hola123', rol_id: r3.id })
+p "#{u1.email}"
+p "Creados #{Usuario.count} usuarios"

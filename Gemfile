@@ -12,8 +12,6 @@ gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
 
-gem 'dotenv-rails'
-gem 'jwt'
 gem 'cancancan'
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
@@ -78,3 +76,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "devise", "~> 4.8"
