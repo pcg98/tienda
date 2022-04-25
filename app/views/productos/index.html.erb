@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <% unless producto.stock==0 %>
+    <% if producto.stock==0 %>
       <li>
           <%= link_to producto.nombre,producto %>
         </a>
