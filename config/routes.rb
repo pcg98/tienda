@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'bienvenido/index'
   devise_for :usuarios
   scope '/admin' do
     resources :usuarios
@@ -8,7 +9,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :productos
-  root "productos#index"
+  #root "productos#index"
+
+  root 'bienvenido#index'
 
   resources :usuarios
   get "usuario/nuevo" => "usuarios#new", :as => "registrarse"

@@ -8,6 +8,9 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= favicon_link_tag 'shopping-cart.png' %>
   </head>
 
   <body>
@@ -25,5 +28,9 @@
   <% end %>
 
   <%= yield %>
+  <hr>
+  <footer></footer><div class="container"><div align="center">Desarrollado por <a href="https://www.nubecolectiva.com" target="_blank">Nube Colectiva</a></div></div>
+
+  <br><br>
   </body>
 </html>
