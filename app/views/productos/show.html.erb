@@ -9,18 +9,14 @@
   <p>Sexo: <%= @producto.sexo %></p>
   <div>
     <ul>
-      <% if can? :update, Producto %>
+      <% if can? :destroy, Producto %>
         <li>
           <%= link_to "Edit", edit_producto_path(@producto) %>
         </li>
       <% end %>
-      <% if can? :destroy, Producto %>
       <li>
-        <%= link_to "Destroy", producto_path(@producto), data: {
-          turbo_method: :delete,
-          turbo_confirm: "Are you sure?"
-        } %>
+        <%= button_to 'Destroy', @producto, method: :delete,
+                      form: {data: {turbo_confirm: 'Are you sure?'}} %>
       </li>
-      <% end %>
     </ul>
   </div>

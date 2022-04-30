@@ -1,0 +1,15 @@
+[33m5502f3583f7fbb192cc34dc684617637271d6f98[m[33m ([m[1;36mHEAD[m[33m)[m vista producto
+[33mc232fc9dc18b904b0900629651a9894fa988203d[m Bootstrap
+[33m023c20c73c51f5f54fcd2873dd460bb41611bc70[m Vista de productos
+[33m90cac9f7a70e44b0f442bfebf884d93182d75eb8[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m Implemantado los login y tal de usuario
+[33m60c6cb90497048ceb5730a057a48a543ee9bde8e[m Usuarios ya tienen roles y las acciones de estos queda implementar el login y como manejamos las sesiones
+[33m0c51d64459960e6b1db0dc44bef9f3ca6ad55193[m Haciendo login de https://joralmo.github.io/2019/04/11/Autenticacion-y-manejo-de-roles-con-RubyOnRails/ nos hemos quedado porque el usuario ya pilla sus roles
+[33maa248cdcb427594883a3c170b0e69e809d8a75f5[m Hemos cambiado los controller y demas a plural
+[33m28b278721f6735ea3abe169b8a67a565cbf2af84[m Operaciones CRUD con form de producto hechas
+[33mbf0c3631283beca482f30d6c175927fb231866b7[m Hemos insertado para imagenes, controller empezado del producto y tocado los modelos
+[33m3afd9994a32518deaad09a9b252c35296fca2c08[m Hemos insertado para imagenes, controller empezado del producto y tocado los modelos
+[33mae352fbd56eaa23125cfdcea85ccc00cc72a75db[m Modelos terminados
+[33m7805ca5bf95928c39363309a76239fd7cbbf6055[m Modelos terminados
+[33m8def5c6d6a84a013b9aebf25edc1af203a2cb124[m Documentacion-uml-controller
+[33me5010e6e78b64b844bb6f7b430aac9c557654196[m documentacion
+[33mdd53efe07b1ec0c4db70a1feb838ebdb56953278[m ruby
