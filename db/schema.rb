@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_03_104944) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_06_071748) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -77,7 +77,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_104944) do
   create_table "productos", force: :cascade do |t|
     t.string "nombre"
     t.float "precio"
-    t.integer "stock"
     t.string "categoria"
     t.string "sexo"
     t.string "marca"
@@ -93,10 +92,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_104944) do
 
   create_table "sizes", force: :cascade do |t|
     t.string "talla"
-    t.integer "productos_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["productos_id"], name: "index_sizes_on_productos_id"
+    t.integer "stock"
+    t.integer "producto_id", null: false
+    t.index ["producto_id"], name: "index_sizes_on_producto_id"
   end
 
   create_table "tarjeta", force: :cascade do |t|
@@ -136,7 +136,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_104944) do
   add_foreign_key "linea_facturas", "productos"
   add_foreign_key "pedidos", "carritos"
   add_foreign_key "pedidos", "usuarios"
-  add_foreign_key "sizes", "productos", column: "productos_id"
+  add_foreign_key "sizes", "productos"
   add_foreign_key "tarjeta", "usuarios"
   add_foreign_key "usuarios", "rols"
 end

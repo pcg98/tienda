@@ -22,13 +22,6 @@
     <% end %>
   </div>
 
-  <%# talla %>
-  <div>
-    <%= form.label :talla %>
-    <br>
-    <%= form.select :talla, ['S','M','L'] %>
-  </div>
-
   <%# precio %>
   <div>
     <%= form.label :precio %>
@@ -39,16 +32,6 @@
     <% end %>
   </div>
 
-  <%# stock %>
-  <div>
-    <%= form.label :stock %>
-    <br>
-    <%= form.text_field :stock %>
-    <% producto.errors.full_messages_for(:stock).each do
-    |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
 
   <%# categoria %>
   <div>
@@ -61,6 +44,12 @@
     <%= form.label :sexo %>
     <%= form.select :sexo, ['M','H','N'] %>
   </div>
+  <%= form.fields_for :sizes do |builder| %>
+    <%= builder.label :stock %>
+    <%= builder.text_field :stock %>
+    <%= builder.label :talla %>
+    <%= builder.text_field :talla %>
+  <%end %>
 
   <div>
     <%= form.file_field :image %>

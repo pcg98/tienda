@@ -40,16 +40,11 @@
           </div>
         </div>
 
-        <% if producto.stock==0 %>
-          <li>
-              <%= link_to producto.nombre,producto %>
-            </a>
-          </li>
-        <% end %>
       <% end %>
     </div>
   </div>
 </section>
+
 <% if can? :create, Producto %>
       <%= link_to "Nuevo productos", new_producto_path %>
 <% end %>

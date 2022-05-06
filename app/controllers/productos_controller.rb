@@ -14,6 +14,8 @@ class ProductosController < ApplicationController
 
   def new
     @producto = Producto.new
+    #Construimos las preguntas para el form
+    @producto.sizes.build
   end
 
   # POST /productos
@@ -49,7 +51,9 @@ class ProductosController < ApplicationController
 
   private
   #Estos son los atributos necesarios para insertar el productos
+  # Hemos metidos los de tallas
   def producto_params
-    params.require(:producto).permit(:talla,:nombre,:precio,:stock,:categoria,:sexo,:marca,:image)
+    params.require(:producto).permit(:nombre,:precio,:categoria,:sexo,:marca,:image,
+                                     sizes_attributes: [:talla,:stock,:producto_id])
   end
 end
