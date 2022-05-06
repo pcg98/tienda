@@ -1,0 +1,7 @@
+Talla : <%= size.talla %> Stock: <%= size.stock %>
+select(report, "campaign_ids") do
+    available_campaigns.each do |c|
+    content_tag(:option, c.name, value: c.id, data: { tags: c.tags.to_json })
+  end
+end
+
