@@ -1,0 +1,8 @@
+<%# En este archivo mostramos las tallas una a una %>
+<% if size.talla != nil %>
+  <p> Talla: <%= size.talla %> Stock: <%= size.stock %>
+    <%= link_to "Destroy Size", [size.producto, size], data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+    } %> </p>
+<% end %>
