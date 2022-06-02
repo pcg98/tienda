@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :productos
+
   #root "productos#index"
   resources :productos do
     resources :sizes

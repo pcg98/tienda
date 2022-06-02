@@ -44,12 +44,7 @@
     <%= form.label :sexo %>
     <%= form.select :sexo, ['M','H','N'] %>
   </div>
-  <%= form.fields_for :sizes do |builder| %>
-    <%= builder.label :stock %>
-    <%= builder.text_field :stock %>
-    <%= builder.label :talla %>
-    <%= builder.text_field :talla %>
-  <%end %>
+
 
   <div>
     <%= form.file_field :image %>

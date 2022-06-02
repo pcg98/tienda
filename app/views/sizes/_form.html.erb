@@ -1,0 +1,9 @@
+ <%# Hacemos que construya una talla %>
+<%= form_with model: [ @producto, @producto.sizes.build ] do
+|f| %>
+  <%= f.label :stock %>
+  <%= f.text_field :stock %>
+  <%= f.label :talla %>
+  <%= f.text_field :talla %>
+  <%= f.submit %>
+<% end %>

@@ -14,10 +14,19 @@
       <div class="col-md-6">
         <h1 class="display-5 fw-bolder"><%= @producto.nombre %></h1>
         <div class="fs-5 mb-5">
-          <span><%= @producto.precio %></span>
+          <span><%= @producto.precio %> €</span>
         </div>
         <p class="lead">Precio: <%= @producto.precio %>, Categoria: <%= @producto.categoria %>, Sexo: <%= @producto.sexo %></p>
-        <p class="lead"> <%= render @producto.sizes %> </p>
+        <%# Mostramos las tallas comprobando que hay stock %>
+        <p class="lead">
+          <select name="producto[talla]">
+            <% @producto.sizes.all.each do |size| %>
+              <% if size.stock > 0 %>
+                <option value=<%= size.talla %>> <%= size.talla%></option>
+              <% end %>
+            <% end %>
+          </select>
+        </p>
         <div class="d-flex">
           <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
           <button class="btn btn-outline-dark flex-shrink-0" type="button">
@@ -35,6 +44,9 @@
       <li>
         <%= link_to "Edit", edit_producto_path(@producto) %>
       </li>
+      <%= render "sizes/form" %>
+      <%# Esto es para borrar las tallas ya existentes %>
+      <%= render @producto.sizes %>
     <% end %>
     <li>
       <%= button_to 'Destroy', @producto, method: :delete,

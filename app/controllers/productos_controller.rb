@@ -14,7 +14,7 @@ class ProductosController < ApplicationController
 
   def new
     @producto = Producto.new
-    #Construimos las preguntas para el form
+    #Creamos el hash de tallas para el form
     @producto.sizes.build
   end
 
