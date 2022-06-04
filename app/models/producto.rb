@@ -4,5 +4,9 @@ class Producto < ApplicationRecord
   has_many :sizes, dependent: :destroy
 
   accepts_nested_attributes_for :sizes, allow_destroy: true
+  #Validaciones
+  validates :nombre, presence:true
+  validates :precio, presence:true
+  validates :marca, presence:true
 
 end

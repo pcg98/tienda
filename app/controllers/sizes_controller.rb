@@ -17,6 +17,14 @@ class SizesController < ApplicationController
     redirect_to producto_path(@producto), status: 303
   end
 
+  def update
+    #Obtengo registro talla
+    @size = Size.find(params[:id])
+    #Actualizamos
+    @size.update(size_params)
+    redirect_to producto_path(@producto)
+  end
+
 
   private
   #Que atributos necesitamos de size

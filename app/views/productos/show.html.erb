@@ -16,18 +16,29 @@
         <div class="fs-5 mb-5">
           <span><%= @producto.precio %> €</span>
         </div>
-        <p class="lead">Precio: <%= @producto.precio %>, Categoria: <%= @producto.categoria %>, Sexo: <%= @producto.sexo %></p>
+        <%# Mensaje de error cuando pilla stock de mas o lo que sea%>
+        <% flash.each do |key, value| %>
+          <div class="<%= flash_class(key) %>">
+            <%= value %>
+          </div>
+        <% end %>
+        <p class="lead">Categoria: <%= @producto.categoria %>, Sexo: <%= @producto.sexo %></p>
         <%# Mostramos las tallas comprobando que hay stock %>
         <p class="lead">
-          <select name="producto[talla]">
-            <% @producto.sizes.all.each do |size| %>
-              <% if size.stock > 0 %>
-                <option value=<%= size.talla %>> <%= size.talla%></option>
-              <% end %>
-            <% end %>
-          </select>
         </p>
         <div class="d-flex">
+          <%= form_for @linea_factura do |f|%>
+            <select name="linea_factura[talla]">
+              <% @producto.sizes.all.each do |size| %>
+                <% if size.stock > 0 %>
+                  <option value=<%= size.talla %>> <%= size.talla%></option>
+                <% end %>
+              <% end %>
+            </select>
+            <%= f.hidden_field :producto_id, :value => @producto.id %>
+            <%= f.number_field :unidades, :value => 1, :min =>  1%>
+            <%= f.submit "Add to Card ", :class => 'btn btn-outline-dark flex-shrink-0' %>
+          <% end %>
           <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
           <button class="btn btn-outline-dark flex-shrink-0" type="button">
             <i class="bi-cart-fill me-1"></i>

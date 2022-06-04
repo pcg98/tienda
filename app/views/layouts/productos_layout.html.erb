@@ -23,10 +23,8 @@
   <%= link_to "Iniciar sesion", new_usuario_session_path %>
 <% end %>
 <%= link_to "Home", root_path %>
-<% flash.each do |nombre, msg| %>
-  <%= content_tag :div, msg, id: "flash_#{nombre}" %>
-<% end %>
-
+<br>
+<%= render 'carritos/carritos' %>
 <%= yield %>
 <hr>
 <footer></footer><div class="container"><div align="center">Desarrollado por Pablo Cruz</div></div>

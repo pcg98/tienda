@@ -1,0 +1,7 @@
+<% @linea_facturas.each do |linea| %>
+  <%= linea.producto.nombre %>
+  <%= linea.producto.precio %>
+  <%= linea.unidades %>
+  <%= link_to "Remove Items", linea_factura_path(item), method: :delete, remote: true%>
+  Subtotal <%= linea.precio_linea  %>
+<% end %>

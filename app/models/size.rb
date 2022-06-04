@@ -9,11 +9,4 @@ class Size < ApplicationRecord
     end
   end
 
-  def size_params
-    params.require(:size).permit(
-      :talla,
-      :stock,
-      :producto_id
-    )
-  end
 end

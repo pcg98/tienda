@@ -2,10 +2,10 @@
 
   <%# nombre %>
   <div>
-    <%= form.label :nombrea %>
+    <%= form.label :nombre %>
     <br>
     <%= form.text_field :nombre %>
-    <% producto.errors.full_messages_for(:title).each do
+    <% producto.errors.full_messages_for(:nombre).each do
       |message| %>
       <div><%= message %></div>
     <% end %>

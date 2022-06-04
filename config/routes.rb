@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   scope '/admin' do
     resources :usuarios
   end
-  resources :carritos_productos
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -14,7 +13,11 @@ Rails.application.routes.draw do
   resources :productos do
     resources :sizes
   end
-
+  get 'carritos/show'
+  #Asi hacemos que se puedan mostrar los carritos
+  resources :carritos, only: [:show]
+  #Que tenga su path tambien
+  resources :linea_facturas
   root 'bienvenido#index'
 
   resources :usuarios
