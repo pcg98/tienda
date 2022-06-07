@@ -1,3 +1,9 @@
 <div id = "carrito-compra">
-  <% render 'linea_facturas' %>
+  <%= @carro.as_json %>
+  <% @carro.linea_facturas.each do |linea_factura|%>
+    <li>Precio linea: <%= linea_factura.precio_linea %> </li>
+    <%= linea_factura.unidades %>
+
+  <% end %>
+
 </div>

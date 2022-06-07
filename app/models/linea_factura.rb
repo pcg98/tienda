@@ -12,30 +12,29 @@ class LineaFactura < ApplicationRecord
   #Actualizamos el precio del carrito
   #after_save self:carrito.precio
 
-  def comprueba_stock
-    #Si el stock es menor a las unidades...
-    if(producto.sizes[:id_size].stock<unidades)
-      #Lo ponemos a nil
-      self.producto_id=nil
-      flash[:error] = "No hay suficiente stock."
-      #Recargamos
-      redirect_back(fallback_location: root_path)
-    end
-  end
 
-  def precio_unitario
-    #Existe el registro?
-    if persisted?
-      #Devolvemos el precio que ya tenia
-      self[:precio_unitario]
-    else
-      #Si no... devolvemos el del producto
-      producto.precio
-    end
-  end
   #Calculamos el precio linea
   def precio_linea
-    result = unidades*precio_unitario
+    result = self.unidades * self.precio_unitario
+  end
+  #Para el stock
+  def comprueba_stock
+    #Pillo producto
+    producto = Producto.find(self.producto.id)
+    @size = producto.sizes.find_by(talla: talla)
+    puts @size
+    #Vemos si hay stock suficiente...
+    if @size.stock < self.unidades
+      #Si no tenemos suficiente pongo true
+      return true
+    else
+      #Si no lo resto el stock
+      @size.stock -= self.unidades
+      #Asigno la talla
+      self.talla = @size.talla
+      @size.save
+      return false
+    end
   end
 
   private
@@ -47,5 +46,6 @@ class LineaFactura < ApplicationRecord
   def set_precio_linea
     self[:precio_linea] = precio_linea
   end
+
 
 end

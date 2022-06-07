@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   protect_from_forgery with: :null_session
+  #Asignamos el carro
+  before_action :current_carrito
 
   #rescue_from CanCan::AccessDenied do |exception|
   #render json: { mensaje: exception.message }, status: 403

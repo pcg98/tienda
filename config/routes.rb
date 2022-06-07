@@ -13,11 +13,17 @@ Rails.application.routes.draw do
   resources :productos do
     resources :sizes
   end
-  get 'carritos/show'
   #Asi hacemos que se puedan mostrar los carritos
-  resources :carritos, only: [:show]
+  #resources :carritos, only: [:show]
+  get 'carritos/:id' => "carritos#show", as: "carrito"
+  delete 'carts/:id' => "carritos#destroy"
+
   #Que tenga su path tambien
-  resources :linea_facturas
+  post "linea_facturas" => "linea_facturas#create"
+  post 'linea_facturas/:id/add' => "linea_facturas#add_quantity", as: "linea_factura_add"
+  post 'linea_facturas/:id/reduce' => "linea_facturas#reduce_quantity", as: "linea_factura_reduce"
+  get 'linea_facturas/:id' => "linea_facturas#show", as: "linea_factura"
+  delete 'linea_facturas/:id' => "linea_facturas#destroy"
   root 'bienvenido#index'
 
   resources :usuarios

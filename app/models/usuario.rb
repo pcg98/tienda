@@ -6,6 +6,7 @@ class Usuario < ApplicationRecord
   belongs_to :rol
   has_many :tarjetums, dependent: :destroy
   has_many :carritos
+  has_many :pedidos
 
   validates :password_confirmation, presence: true
   before_save :assign_role

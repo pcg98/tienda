@@ -12,12 +12,23 @@ module ApplicationHelper
   #Esto es para ver nuestro carrito actual
   def current_carrito
     #La sesion actual tiene algun carrito?
-    if !session[:carrito_id].nil?
+    if session[:carrito_id]
       #Lo recogemos
-      Carrito.find(session[:carrito_id])
-    else
+      carrito = Carrito.find(session[:carrito_id])
+      if carrito.present?
+        #Que el actual sea ese
+        @current_carrito = carrito
+      else
+        #Lo pongo a null
+        session[:carrito_id] = nil
+      end
+    end
+    if session[:carrito_id] == nil
+      puts @current_carrito.as_json
+      usuario = current_usuario
       #Lo creamos
-      current_usuario.carritos.new
+      @current_carrito = usuario.carritos.create
+      session[:carrito_id] = @current_carrito.id
     end
   end
 end

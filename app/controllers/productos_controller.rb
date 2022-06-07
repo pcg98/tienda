@@ -1,9 +1,6 @@
 class ProductosController < ApplicationController
+
   load_and_authorize_resource class: "Producto"
-  load_resource class: "Usuario"
-  load_resource class: "Carrito"
-  load_resource class: "LineaFactura"
-  load_resource class: "Size"
   layout "productos_layout"
   # GET /productos
   def index
@@ -14,7 +11,7 @@ class ProductosController < ApplicationController
   def show
     @producto = Producto.find(params[:id])
     #Creamos el array de linea_facturas
-    @linea_factura = current_carrito.linea_facturas.new
+    @linea_factura = LineaFactura.new
   end
 
   def new
@@ -26,7 +23,7 @@ class ProductosController < ApplicationController
   # POST /productos
   def create
     @producto = Producto.new(producto_params)
-
+    raise params.inspect
     if @producto.save
       redirect_to @producto
     else

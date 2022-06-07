@@ -1,41 +1,73 @@
 class LineaFacturasController < ApplicationController
-  load_resource class: "Producto"
-  load_resource class: "Usuario"
-  load_resource class: "Carrito"
-  load_resource class: "LineaFactura"
-  load_resource class: "Size"
+
+  after_action :set_linea_factura
 
   def create
     #Obtenemos carrito
-    @carrito = current_carrito
-    #Le ponemos la linea de factura recibida
-    @linea_factura = @carrito.linea_facturas.new(linea_factura_params)
-    #Lo guardamos
-    @carrito.save
-    #Guardamos el id del carrito
-    session[:carrito_id] = @carrito.id
+    @carrito = @current_carrito
+    producto = Producto.find(params['linea_factura']['producto_id'])
+    #Obtenemos talla
+    size = Size.find(params['linea_factura']['talla']).talla
+    #Comprobamos si ya esta en el carrito
+    if @carrito.productos.include?(producto)
+      #Encontramos la linea
+      @linea_factura = @carrito.linea_facturas.find_by(producto_id: producto)
+      #Añadimos uno
+      @linea_factura.unidades +=1
+    else
+      #Creamos linea de factura
+      @linea_factura = LineaFactura.create
+      #Asignamos carro
+      @linea_factura.carrito = @carrito
+      #Asignamos item
+      @linea_factura.producto = producto
+      #Talla
+      @linea_factura.talla = size
+      #Precio unitario
+      @linea_factura.precio_unitario = producto.precio
+      #Cantidad
+      @linea_factura.unidades = params['linea_factura']['unidades']
+    end
+    puts @linea_factura.class,' esta definida'
+    #Llamamos al metodo del modelo para comprobar stock
+    # Devuelve true si no hay y mostramos mensaje de error
+    if @linea_factura.comprueba_stock
+      flash[:error] = "No hay suficiente stock"
+      redirect_to producto_path(producto)
+      return
+    end
+    #Si tenemos lo guardamos
+    @linea_factura.save
+    #Muestro carrito
+    redirect_to carrito_path(@current_carrito)
   end
-  def update
-    #Obtenemos carrito
-    @carrito = current_carrito
-    #Obtenemos linea
-    @linea_factura = @carrito.linea_facturas.find(params[:id])
-    #La actulizamos
-    @linea_factura.update(linea_factura_params)
-    #Las lineas factura
-    @linea_facturas = current_carrito.linea_facturas
+
+  def add_quantity
+    @linea_factura.unidades +=1
+    @linea_factura.save
+    redirect_to carrito_path(@current_carrito)
+  end
+  def reduce_quantity
+    if @linea_factura.unidades > 1
+      @linea_factura.unidades -=1
+    end
+    @linea_factura.save
+    redirect_to carrito_path(@current_carrito)
   end
   def destroy
-    #Obtenemos carro
-    @carrito = current_carrito
-    #Obt linea
-    @linea_factura = @carrito.linea_facturas.find(params[:id])
     #destruyo
     @linea_factura.destroy
     @linea_facturas = current_carrito.linea_facturas
   end
 
-  def linea_factura_params
-    params.require(:linea_factura).permit(:unidades,:producto_id,:talla)
-  end
+  private
+
+    def set_linea_factura
+      #Pillo actual linea
+      @linea_factura = LineaFactura.find_by(id: params[:id])
+    end
+
+    def linea_factura_params
+      params.require(:linea_factura).permit(:unidades,:producto_id,:talla)
+    end
 end

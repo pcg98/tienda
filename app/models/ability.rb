@@ -23,6 +23,7 @@ class Ability
     can :manage, Carrito, { usuario_id: usuario.id}
     #Ver info y actualizar de su usuario
     can [:read, :update, :destroy], Usuario, { id: usuario.id }
+    can [:manage], LineaFactura
   end
   #Visitantes
   def visitante_permisos(usuario)
