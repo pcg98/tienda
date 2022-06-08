@@ -1,17 +1,17 @@
 class ProductosController < ApplicationController
 
-  load_and_authorize_resource class: "Producto"
   layout "productos_layout"
   # GET /productos
   def index
     @productos = Producto.all
+    @current_carrito = current_carrito
   end
 
   # GET /productos/:id
   def show
     @producto = Producto.find(params[:id])
     #Creamos el array de linea_facturas
-    @linea_factura = LineaFactura.new
+    @linea_factura = current_carrito.linea_facturas.new
   end
 
   def new

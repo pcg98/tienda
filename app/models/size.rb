@@ -8,5 +8,4 @@ class Size < ApplicationRecord
       false
     end
   end
-
 end

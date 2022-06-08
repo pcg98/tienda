@@ -1,12 +1,14 @@
 class LineaFactura < ApplicationRecord
   belongs_to :carrito
   belongs_to :producto
+  belongs_to :size
 
   #Ponemos el precio de la unidad
   before_save :set_precio_unitario
   #Calculamos su precio linea, que es el
   # unitario * unidades
   before_save :set_precio_linea
+  before_destroy :reponer_stock
   #Vemos que el producto tenga stock
   #before_save :comprueba_stock
   #Actualizamos el precio del carrito
@@ -19,9 +21,7 @@ class LineaFactura < ApplicationRecord
   end
   #Para el stock
   def comprueba_stock
-    #Pillo producto
-    producto = Producto.find(self.producto.id)
-    @size = producto.sizes.find_by(talla: talla)
+    @size = Size.find(self.size_id)
     puts @size
     #Vemos si hay stock suficiente...
     if @size.stock < self.unidades
@@ -31,13 +31,23 @@ class LineaFactura < ApplicationRecord
       #Si no lo resto el stock
       @size.stock -= self.unidades
       #Asigno la talla
-      self.talla = @size.talla
+      self.size = @size
       @size.save
       return false
     end
   end
 
+
   private
+  #Metodo que sera llamado al borrar
+  # una linea de factura para devolver stock
+  def reponer_stock
+    @size = Size.find(self.size_id)
+    puts @size
+    #Si no lo resto el stock
+    @size.stock += self.unidades
+    @size.save
+  end
   #En los getter llamamos a los metodos que se encargan
   # de asignarle su valor
   def set_precio_unitario

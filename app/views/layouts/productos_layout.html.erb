@@ -18,7 +18,7 @@
   Registrado como <%= current_usuario.nombre %>.
   <%= link_to "Editar perfil", edit_usuario_registration_path %>
   <%= button_to "Desconectarse", destroy_usuario_session_path, method: :delete %>
-  <%# render 'carritos/carritos' %>
+  <%= render 'carritos/carritos' %>
 <% else %>
   <%= link_to "Registrarse", new_usuario_registration_path %> o
   <%= link_to "Iniciar sesion", new_usuario_session_path %>

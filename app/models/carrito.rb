@@ -2,8 +2,10 @@ class Carrito < ApplicationRecord
   belongs_to :usuario
   has_many :linea_facturas, dependent: :destroy
   has_many :productos, through: :linea_facturas
+  has_many :sizes, through: :linea_facturas
   #Antes de insertarlo, que calcule su precio
   before_save :set_precio_total
+  before_create :set_fields
 
   def precio_total
     #Cojo el array de lineas facturas y lo recorro uno a uno
@@ -12,9 +14,13 @@ class Carrito < ApplicationRecord
 
   private
 
-
+  def set_fields
+    self.fecha_creaccion = Time.now
+    self.finalizado = false
+  end
   def set_precio_total
     self[:precio_total] = precio_total
+    self.save
   end
   #Para cerrar el carrito
   def cierre

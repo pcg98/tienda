@@ -2,7 +2,9 @@
   <%= @carro.as_json %>
   <% @carro.linea_facturas.each do |linea_factura|%>
     <li>Precio linea: <%= linea_factura.precio_linea %> </li>
-    <%= linea_factura.unidades %>
+    <% if linea_factura.producto.image.attached? %>
+      <%= image_tag linea_factura.producto.image %>
+    <% end %>
 
   <% end %>
 

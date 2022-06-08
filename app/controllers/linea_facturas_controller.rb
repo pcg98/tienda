@@ -7,11 +7,11 @@ class LineaFacturasController < ApplicationController
     @carrito = @current_carrito
     producto = Producto.find(params['linea_factura']['producto_id'])
     #Obtenemos talla
-    size = Size.find(params['linea_factura']['talla']).talla
-    #Comprobamos si ya esta en el carrito
-    if @carrito.productos.include?(producto)
+    size = Size.find(params['linea_factura']['size_id'])
+    #Comprobamos si ya esta en el la talla carrito
+    if @carrito.sizes.include?(size)
       #Encontramos la linea
-      @linea_factura = @carrito.linea_facturas.find_by(producto_id: producto)
+      @linea_factura = @carrito.linea_facturas.find_by(size_id: size)
       #Añadimos uno
       @linea_factura.unidades +=1
     else
@@ -22,7 +22,7 @@ class LineaFacturasController < ApplicationController
       #Asignamos item
       @linea_factura.producto = producto
       #Talla
-      @linea_factura.talla = size
+      @linea_factura.size = size
       #Precio unitario
       @linea_factura.precio_unitario = producto.precio
       #Cantidad
@@ -68,6 +68,6 @@ class LineaFacturasController < ApplicationController
     end
 
     def linea_factura_params
-      params.require(:linea_factura).permit(:unidades,:producto_id,:talla)
+      params.require(:linea_factura).permit(:unidades,:producto_id,:size_id)
     end
 end

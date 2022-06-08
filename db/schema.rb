@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_06_071748) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_08_113039) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,7 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_06_071748) do
   end
 
   create_table "linea_facturas", force: :cascade do |t|
-    t.string "talla", limit: 3
     t.float "precio_unitario"
     t.integer "unidades"
     t.float "precio_linea"
@@ -58,8 +57,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_06_071748) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "carrito_id", null: false
+    t.integer "size_id", null: false
     t.index ["carrito_id"], name: "index_linea_facturas_on_carrito_id"
     t.index ["producto_id"], name: "index_linea_facturas_on_producto_id"
+    t.index ["size_id"], name: "index_linea_facturas_on_size_id"
   end
 
   create_table "pedidos", force: :cascade do |t|
@@ -134,6 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_06_071748) do
   add_foreign_key "carritos", "usuarios"
   add_foreign_key "linea_facturas", "carritos"
   add_foreign_key "linea_facturas", "productos"
+  add_foreign_key "linea_facturas", "sizes"
   add_foreign_key "pedidos", "carritos"
   add_foreign_key "pedidos", "usuarios"
   add_foreign_key "sizes", "productos"
