@@ -9,6 +9,7 @@ class LineaFactura < ApplicationRecord
   # unitario * unidades
   before_save :set_precio_linea
   before_destroy :reponer_stock
+
   #Vemos que el producto tenga stock
   #before_save :comprueba_stock
   #Actualizamos el precio del carrito

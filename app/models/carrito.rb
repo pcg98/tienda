@@ -20,7 +20,6 @@ class Carrito < ApplicationRecord
   end
   def set_precio_total
     self[:precio_total] = precio_total
-    self.save
   end
   #Para cerrar el carrito
   def cierre

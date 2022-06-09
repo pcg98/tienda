@@ -4,14 +4,12 @@ class ProductosController < ApplicationController
   # GET /productos
   def index
     @productos = Producto.all
-    @current_carrito = current_carrito
   end
 
   # GET /productos/:id
   def show
     @producto = Producto.find(params[:id])
-    #Creamos el array de linea_facturas
-    @linea_factura = current_carrito.linea_facturas.new
+    @linea_factura = LineaFactura.new
   end
 
   def new
