@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   #Asi hacemos que se puedan mostrar los carritos
   #resources :carritos, only: [:show]
   get 'carritos/:id' => "carritos#show", as: "carrito"
-  delete 'carts/:id' => "carritos#destroy"
+  delete 'carritos/:id' => "carritos#destroy"
 
   #Que tenga su path tambien
   post "linea_facturas" => "linea_facturas#create"

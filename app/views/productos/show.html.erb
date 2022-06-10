@@ -26,12 +26,14 @@
         <%# Mostramos las tallas comprobando que hay stock %>
         <p class="lead">
         </p>
-        <div class="d-flex">
-          <%= form_for @linea_factura do |f|%>
-            <%= f.hidden_field :producto_id, :value => @producto.id %>
-            <%= f.number_field :unidades, :value => 1, :min =>  1 %>
-            <%= f.select :size_id, @producto.sizes.map { |s| [s.talla, s.id]}, {}, class: "form-control" %>
-            <%= f.submit "Add to Card ", :class => 'btn btn-outline-dark flex-shrink-0' %>
+        <% if usuario_signed_in? %>
+          <div class="d-flex">
+            <%= form_for @linea_factura do |f|%>
+              <%= f.hidden_field :producto_id, :value => @producto.id %>
+              <%= f.number_field :unidades, :value => 1, :min =>  1 %>
+              <%= f.select :size_id, @producto.sizes.map { |s| [s.talla, s.id]}, {}, class: "form-select" %>
+              <%= f.submit "Add to Card ", :class => 'btn btn-outline-dark flex-shrink-0' %>
+            <% end %>
           <% end %>
           <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
           <button class="btn btn-outline-dark flex-shrink-0" type="button">

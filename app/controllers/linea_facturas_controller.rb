@@ -12,8 +12,8 @@ class LineaFacturasController < ApplicationController
     if @carrito.sizes.include?(size)
       #Encontramos la linea
       @linea_factura = @carrito.linea_facturas.find_by(size_id: size)
-      #Añadimos uno
-      @linea_factura.unidades +=1
+      #Añadimos las necesarias
+      @linea_factura.unidades += params['linea_factura']['unidades'].to_i
     else
       #Creamos linea de factura
       @linea_factura = LineaFactura.create
@@ -43,7 +43,17 @@ class LineaFacturasController < ApplicationController
   end
 
   def add_quantity
-    @linea_factura.unidades +=1
+    #Encontramos la linea
+    @linea_factura = @carrito.linea_facturas.find_by(size_id: size)
+    #Añadimos las necesarias
+    @linea_factura.unidades += 1
+    #Comprobamos el stock
+    if @linea_factura.comprueba_stock
+      flash[:error] = "No hay suficiente stock"
+      redirect_to carrito_path(@current_carrito)
+      return
+    end
+    #Si tenemos lo guardamos
     @linea_factura.save
     redirect_to carrito_path(@current_carrito)
   end
@@ -52,12 +62,11 @@ class LineaFacturasController < ApplicationController
       @linea_factura.unidades -=1
     end
     @linea_factura.save
-    redirect_to carrito_path(@current_carrito)
   end
   def destroy
     #destruyo
-    @linea_factura.destroy
-    @linea_facturas = current_carrito.linea_facturas
+    LineaFactura.find(params[:id]).destroy
+    redirect_to carrito_path(@current_carrito)
   end
 
   private

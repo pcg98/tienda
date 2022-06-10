@@ -33,7 +33,6 @@ class LineaFactura < ApplicationRecord
       @size.stock -= self.unidades
       #Asigno la talla
       self.size = @size
-      @size.save
       return false
     end
   end

@@ -20,15 +20,37 @@ class SizesController < ApplicationController
   def update
     #Obtengo registro talla
     @size = Size.find(params[:id])
+    new_stock = params[:stock].to_i
+    puts params.as_json, 'Prueba'
+    if(new_stock < 0)
+      flash[:error] = "No puedes poner stock de menos de 0"
+      return
+    end
+    #Si es para restar...
+    if(@size.stock<new_stock)
+      #Encuentro todos los carritos sin finalizar
+      @carritos = Carrito.where(finalizado: false)
+      #Si hay alguno con la talla damos error
+      if(@carritos.sizes.include?(@size) )
+        flash[:error] = "La talla esta en un carro, intentelo mas tarde"
+        redirect_back(fallback_location: root_path)
+        return
+      end
+    end
     #Actualizamos
-    @size.update(size_params)
-    redirect_to producto_path(@producto)
+    if(@size.update(size_params))
+    flash[:success] = "Stock cambiado correctamente"
+    redirect_back(fallback_location: root_path)
+    else
+      flash[:error] = "Ha habido algun error"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
 
   private
   #Que atributos necesitamos de size
   def size_params
-    params.require(:size).permit(:stock,:talla)
+    params.require(:size).permit(:id,:stock,:talla)
   end
 end
