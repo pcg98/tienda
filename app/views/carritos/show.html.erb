@@ -1,16 +1,71 @@
-<div id = "carrito-compra">
-  <%= @carro.as_json %>
-  <% @carro.linea_facturas.each do |linea_factura|%>
-    <li>Precio linea: <%= linea_factura.precio_linea %> </li>
-    <% if linea_factura.producto.image.attached? %>
-      <%= image_tag linea_factura.producto.image %>
-    <% end %>
-    Talla <%= linea_factura.size.talla %>
-    Precio unidad <%= linea_factura.precio_unitario %>
-    Unidades <%= linea_factura.unidades %>
-    <%= link_to "Add unit", linea_factura_add_path(linea_factura), class: "btn btn-outline-dark mt-auto" %>
-    <%= button_to 'Destroy', linea_factura, method: :delete,
-                form: {data: {turbo_confirm: 'Are you sure?'}}%>
-  <% end %>
-
-</div>
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-lg-12 col-md-12 col-12">
+        <h3 class="display-5 mb-2 text-center">Carrito</h3>
+        <p class="mb-5 text-center">
+          <i class="text-info font-weight-bold"><%= @carro.linea_facturas.count %></i> Items del carrito </p>
+        <table id="shoppingCart" class="table table-condensed table-responsive">
+          <thead>
+          <tr>
+            <th style="width:60%">Producto</th>
+            <th style="width:12%">Precio</th>
+            <th style="width:10%">Quantity</th>
+            <th style="width:10%">talla</th>
+            <th style="width:16%"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @carro.linea_facturas.each do |linea_factura|%>
+            <tr>
+              <td data-th="Producto">
+                <div class="row">
+                  <div class="col-md-3 text-left">
+                    <% if linea_factura.producto.image.attached? %>
+                      <%= image_tag linea_factura.producto.image, class: 'img-fluid d-none d-md-block rounded mb-2 shadow' %>
+                    <% else %>
+                      <img src="https://via.placeholder.com/250x250/5fa9f8/ffffff" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                    <% end %>
+                  </div>
+                  <div class="col-md-9 text-left mt-sm-2">
+                    <h4> <%= linea_factura.producto.nombre %></h4>
+                    <p class="font-weight-light"> <%= linea_factura.producto.marca %></p>
+                  </div>
+                </div>
+              </td>
+              <td data-th="Precio"> <%= linea_factura.precio_linea %> </td>
+              <td data-th="Talla"> <%= linea_factura.size.talla %> </td>
+              <td data-th="Unidades">
+                <%= linea_factura.unidades %>
+                <%= link_to '<i class="bi bi-plus-circle"></i>Add unit'.html_safe, linea_factura_add_path(linea_factura), class: "btn btn-success mt-auto" %>
+              </td>
+              <td class="actions" data-th="">
+                <div class="text-right">
+                  <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                    <i class="fas fa-sync"></i>
+                  </button>
+                  <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <div class="float-right text-right">
+          <h4>Subtotal:</h4>
+          <h1> <%= @carro.precio_total %>€</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4 d-flex align-items-center">
+      <div class="col-sm-6 order-md-2 text-right">
+        <a href="catalog.html" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
+      </div>
+      <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+          <i class="fas fa-arrow-left mr-2"></i> <%= link_to 'Continuar comprando', productos_path %>
+      </div>
+    </div>
+  </div>
+</section>

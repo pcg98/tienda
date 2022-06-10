@@ -1,0 +1,22 @@
+<div id = "carrito-compra">
+  <%= @carro.as_json %>
+  <%# Mensaje de error cuando pilla stock de mas o lo que sea%>
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
+  <% @carro.linea_facturas.each do |linea_factura|%>
+    <li>Precio linea: <%= linea_factura.precio_linea %> </li>
+    <% if linea_factura.producto.image.attached? %>
+      <%= image_tag linea_factura.producto.image %>
+    <% end %>
+    Talla <%= linea_factura.size.talla %>
+    Precio unidad <%= linea_factura.precio_unitario %>
+    Unidades <%= linea_factura.unidades %>
+    <%= link_to "Add unit", linea_factura_add_path(linea_factura), class: "btn btn-outline-dark mt-auto" %>
+    <%= button_to 'Destroy', linea_factura, method: :delete,
+                form: {data: {turbo_confirm: 'Are you sure?'}}%>
+  <% end %>
+
+</div>
