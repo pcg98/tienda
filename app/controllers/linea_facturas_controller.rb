@@ -38,13 +38,14 @@ class LineaFacturasController < ApplicationController
     end
     #Si tenemos lo guardamos
     @linea_factura.save
+    flash[:success] = "Añadido al carrito correctamente"
     #Muestro carrito
-    redirect_to carrito_path(@current_carrito)
+    redirect_to producto_path(producto)
   end
 
   def add_quantity
     #Encontramos la linea
-    @linea_factura = @carrito.linea_facturas.find_by(size_id: size)
+    @linea_factura = @current_carrito.linea_facturas.find(params[:id])
     #Añadimos las necesarias
     @linea_factura.unidades += 1
     #Comprobamos el stock
@@ -55,6 +56,7 @@ class LineaFacturasController < ApplicationController
     end
     #Si tenemos lo guardamos
     @linea_factura.save
+    flash[:success] = "Añadido con exito"
     redirect_to carrito_path(@current_carrito)
   end
   def reduce_quantity

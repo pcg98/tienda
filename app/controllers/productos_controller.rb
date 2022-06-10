@@ -21,7 +21,6 @@ class ProductosController < ApplicationController
   # POST /productos
   def create
     @producto = Producto.new(producto_params)
-    raise params.inspect
     if @producto.save
       redirect_to @producto
     else

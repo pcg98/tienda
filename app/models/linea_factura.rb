@@ -8,7 +8,7 @@ class LineaFactura < ApplicationRecord
   #Calculamos su precio linea, que es el
   # unitario * unidades
   before_save :set_precio_linea
-  before_destroy :reponer_stock
+
 
   #Vemos que el producto tenga stock
   #before_save :comprueba_stock
@@ -39,15 +39,7 @@ class LineaFactura < ApplicationRecord
 
 
   private
-  #Metodo que sera llamado al borrar
-  # una linea de factura para devolver stock
-  def reponer_stock
-    @size = Size.find(self.size_id)
-    puts @size
-    #Si no lo resto el stock
-    @size.stock += self.unidades
-    @size.save
-  end
+
   #En los getter llamamos a los metodos que se encargan
   # de asignarle su valor
   def set_precio_unitario

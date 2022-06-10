@@ -26,9 +26,16 @@ module ApplicationHelper
       end
       if session[:carrito_id] == nil
         usuario = current_usuario
-        #Lo creamos
-        @current_carrito = usuario.carritos.create
-        session[:carrito_id] = @current_carrito.id
+        #Vemos si hay algun carrito suyo
+        @current_carrito = Carrito.find_by(usuario: usuario, finalizado: false)
+        if(@current_carrito.nil?)
+          #Lo creamos
+          @current_carrito = usuario.carritos.create
+          session[:carrito_id] = @current_carrito.id
+        else
+          #Asignamos id
+          session[:carrito_id] = @current_carrito.id
+        end
       end
     end
     return @current_carrito
