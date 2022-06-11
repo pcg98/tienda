@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tienda</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+  <head>
+    <title>Tienda</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
 
-  <%= stylesheet_link_tag "productos/styles", "data-turbo-track": "reload" %>
-  <%= javascript_include_tag "productos/scripts", "data-turbo-track": "reload", defer: true %>
-  <%= javascript_importmap_tags %>
-  <%= favicon_link_tag 'shopping-cart.png' %>
-</head>
+    <%= stylesheet_link_tag "productos/styles", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "productos/scripts", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_importmap_tags %>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <%= favicon_link_tag 'shopping-cart.png' %>
+  </head>
 
-<body>
-<% if usuario_signed_in? %>
-  Registrado como <%= current_usuario.nombre %>.
-  <%= link_to "Editar perfil", edit_usuario_registration_path %>
-  <%= button_to "Desconectarse", destroy_usuario_session_path, method: :delete %>
-  <%= render 'carritos/carritos' %>
-<% else %>
-  <%= link_to "Registrarse", new_usuario_registration_path %> o
-  <%= link_to "Iniciar sesion", new_usuario_session_path %>
-<% end %>
-<%= link_to "Home", root_path %>
-<br>
-<%= yield %>
-<hr>
-<footer></footer><div class="container"><div align="center">Desarrollado por Pablo Cruz</div></div>
+  <body>
+    <%= render 'layouts/header' %>
+    <%= yield %>
+    <hr>
+    <footer></footer><div class="container"><div align="center">Desarrollado por Pablo Cruz</div></div>
 
-<br><br>
-</body>
+    <br><br>
+  </body>
 </html>
