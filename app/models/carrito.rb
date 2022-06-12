@@ -22,7 +22,7 @@ class Carrito < ApplicationRecord
       #Obtenemos size
       @size = linea_factura.size
       #Restamos unidades
-      @size -= linea_factura.unidades
+      @size.stock -= linea_factura.unidades
       #Guardamos
       @size.save
     end

@@ -8,14 +8,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :productos
-
+  resources :pedidos, only: [:show, :index]
   #root "productos#index"
   resources :productos do
     resources :sizes
   end
-  #Asi hacemos que se puedan mostrar los carritos
-  #resources :carritos, only: [:show]
-  get 'carritos/:id' => "carritos#show", as: "carrito"
+  resources :carritos, only: [:show]
+
+  get "/carritos/:carrito_id/pedidos" => "pedidos#create", as: "pedidos_create"
+
   delete 'carritos/:id' => "carritos#destroy"
 
   #Que tenga su path tambien
@@ -26,6 +27,8 @@ Rails.application.routes.draw do
   delete 'linea_facturas/:id' => "linea_facturas#destroy"
   root 'bienvenido#index'
 
-  resources :usuarios
+  resources :usuarios do
+    resources :pedidos, only: [:show, :index]
+  end
   get "usuario/nuevo" => "usuarios#new", :as => "registrarse"
 end
