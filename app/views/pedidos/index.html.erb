@@ -1,0 +1,44 @@
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-lg-12 col-md-12 col-12">
+        <h3 class="display-5 mb-2 text-center">Pedidos</h3>
+        <p class="mb-5 text-center">
+          <i class="text-info font-weight-bold"><%= @pedidos.count %></i> pedidos en esta cuenta </p>
+        <table id="shoppingCart" class="table table-condensed table-responsive">
+          <thead>
+          <tr>
+            <th style="width:60%">ID pedido</th>
+            <th style="width:10%">Fecha creacion</th>
+            <th style="width:10%">Estado</th>
+            <th style="width:12%">Precio total</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @pedidos.each do |pedido|%>
+            <tr>
+              <td data-th="ID del pedido">
+                <div class="row">
+                  <div class="col-md-3 text-left">
+                    <%= pedido.id %>
+                  </div>
+                </div>
+              </td>
+              <td data-th="Fecha creacion"> <%= pedido.created_at %> </td>
+              <td data-th="Estado"> <%= pedido.status %> </td>
+              <td data-th="Precio total">
+                <%= pedido.carrito.precio_total %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row mt-4 d-flex align-items-center">
+      <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+        <i class="fas fa-arrow-left mr-2"></i> <%= link_to 'Continuar comprando', productos_path %>
+      </div>
+    </div>
+  </div>
+</section>

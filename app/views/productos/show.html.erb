@@ -1,4 +1,4 @@
-
+<%= link_to "Back", productos_path %>
 
 <!-- Product section-->
 <section class="py-5">
@@ -30,12 +30,12 @@
           <div class="d-flex">
             <%= form_for @linea_factura do |f|%>
               <%= f.hidden_field :producto_id, :value => @producto.id %>
-              <%= f.number_field :unidades, :value => 1, :min =>  1, class: "form-control text-center me-3", style: "max-width: 5rem", id: "inputQuantity" %>
+              <%= f.number_field :unidades, :value => 1, :min =>  1, class: "form-control text-center me-3", style: "max-width: 5rem" %>
               <%= f.select :size_id, @producto.sizes.map { |s| [s.talla, s.id]}, {}, class: "form-select text-center", style: "max-width: 5rem" %>
-              <%= f.button nil, :class => "btn btn-outline-dark flex-shrink-0", type:"button" do %>
+              <%= button_tag :class => 'btn btn-outline-dark flex-shrink-0' do %>
                 <i class="bi-cart-fill me-1"></i>
                 Añadir al carrito
-              <% end %>
+                <% end %>
             <% end %>
           <% end %>
         </div>

@@ -20,20 +20,16 @@ class LineaFactura < ApplicationRecord
   def precio_linea
     result = self.unidades * self.precio_unitario
   end
-  #Para el stock
+  #Para el stock -> False no hay, true si
   def comprueba_stock
-    @size = Size.find(self.size_id)
+    @size = self.size
     puts @size
     #Vemos si hay stock suficiente...
     if @size.stock < self.unidades
-      #Si no tenemos suficiente pongo true
-      return true
-    else
-      #Si no lo resto el stock
-      @size.stock -= self.unidades
-      #Asigno la talla
-      self.size = @size
+      #Si no tenemos suficiente pongo false
       return false
+    else
+      return true
     end
   end
 

@@ -1,17 +1,20 @@
 class PedidosController < ApplicationController
 
   def create
-    #Cambiamos las cosas del carrito
-    @current_carrito.finalizado = true
-    @current_carrito.save
     #Creo el pedido del usuario
     @pedido = current_usuario.pedidos.create
-    #Asigno el carro
+    #Asignamos carro
     @pedido.carrito = @current_carrito
-    @pedido.status = "Procesando pedido"
+    result_stock = @pedido.stock?
+    #Si es distinto de true
+    if result_stock != true
+      flash[:error] = result_stock
+      redirect_to carrito_path(@current_carrito)
+      return
+    end
     if @pedido.save
       flash[:success] = "Exito en el pedido"
-      redirect_to pedidos_show_path(@pedido)
+      redirect_to pedido_path(@pedido)
     else
       flash[:error] = "Error, por favor intentelo mas tarde"
       redirect_to carrito_path(@current_carrito)

@@ -14,6 +14,18 @@ class Carrito < ApplicationRecord
     linea_facturas.collect{|linea_factura| linea_factura.valid? ? linea_factura.precio_linea : 0}.sum
   end
 
+  #True tenemos, false no
+  def comprueba_stock?
+    linea_facturas.collect do |linea_factura|
+      if !linea_factura.comprueba_stock
+        #Si no tiene ya, devolvemos un false
+        return "No hay suficiente stock de #{linea_factura.producto.nombre}"
+      end
+    end
+    #Si tiene stock, lo devolvemos como true
+    return true
+  end
+
 
   private
 

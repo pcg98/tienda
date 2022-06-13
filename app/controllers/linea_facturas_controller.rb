@@ -30,8 +30,8 @@ class LineaFacturasController < ApplicationController
     end
     puts @linea_factura.class,' esta definida'
     #Llamamos al metodo del modelo para comprobar stock
-    # Devuelve true si no hay y mostramos mensaje de error
-    if @linea_factura.comprueba_stock
+    # Devuelve false si no hay y mostramos mensaje de error
+    if !@linea_factura.comprueba_stock
       flash[:error] = "No hay suficiente stock"
       redirect_to producto_path(producto)
       return

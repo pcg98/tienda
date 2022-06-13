@@ -1,6 +1,7 @@
 <% if usuario_signed_in? %>
   Registrado como <%= current_usuario.nombre %>.
   <%= link_to "Editar perfil", edit_usuario_registration_path %>
+  <%= link_to "Ver pedidos", pedidos_path %>
   <%= button_to "Desconectarse", destroy_usuario_session_path, method: :delete %>
 <% else %>
   <%= link_to "Registrarse", new_usuario_registration_path %> o
