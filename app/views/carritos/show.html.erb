@@ -4,7 +4,7 @@
       <div class="col-lg-12 col-md-12 col-12">
         <h3 class="display-5 mb-2 text-center">Carrito</h3>
         <p class="mb-5 text-center">
-          <i class="text-info font-weight-bold"><%= @carro.linea_facturas.count %></i> Items del carrito </p>
+          <i class="text-info font-weight-bold"><%= @carro.linea_facturas.count %></i> items en el carrito </p>
         <table id="shoppingCart" class="table table-condensed table-responsive">
           <thead>
           <tr>
@@ -37,16 +37,15 @@
               <td data-th="Talla"> <%= linea_factura.size.talla %> </td>
               <td data-th="Unidades">
                 <%= linea_factura.unidades %>
-                <%= link_to '<i class="bi bi-plus-circle"></i>Add unit'.html_safe, linea_factura_add_path(linea_factura), class: "btn btn-success mt-auto" %>
               </td>
               <td class="actions" data-th="">
                 <div class="text-right">
-                  <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                    <i class="fas fa-sync"></i>
-                  </button>
-                  <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                    <i class="fas fa-trash"></i>
-                  </button>
+                  <%= link_to '<i class="bi bi-plus-circle"></i>'.html_safe, linea_factura_add_path(linea_factura), class: "btn btn-white border-secondary bg-white btn-md mb-2" %>
+                  <%= link_to '<i class="bi bi-dash-circle"></i>'.html_safe, linea_factura_reduce_path(linea_factura), class: "btn btn-white border-secondary bg-white btn-md mb-2" %>
+                  <%= button_to linea_factura, method: :delete, class: "btn btn-white border-secondary bg-white btn-md mb-2",
+                                form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+                    <i class="bi bi-trash"></i>
+                  <% end %>
                 </div>
               </td>
             </tr>

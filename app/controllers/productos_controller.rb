@@ -9,6 +9,7 @@ class ProductosController < ApplicationController
   # GET /productos/:id
   def show
     @producto = Producto.find(params[:id])
+    @productos = Producto.order(created_at: :desc).limit(3).where.not(id: @producto.id)
     @linea_factura = LineaFactura.new
   end
 

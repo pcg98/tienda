@@ -1,6 +1,11 @@
 class PedidosController < ApplicationController
 
   def create
+    if (@current_carrito.linea_facturas.empty?)
+      flash[:error] = "Carrito vacio"
+      redirect_to carrito_path(@current_carrito)
+      return
+    end
     #Creo el pedido del usuario
     @pedido = current_usuario.pedidos.create
     #Asignamos carro

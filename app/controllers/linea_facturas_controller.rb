@@ -49,7 +49,7 @@ class LineaFacturasController < ApplicationController
     #Añadimos las necesarias
     @linea_factura.unidades += 1
     #Comprobamos el stock
-    if @linea_factura.comprueba_stock
+    if !@linea_factura.comprueba_stock
       flash[:error] = "No hay suficiente stock"
       redirect_to carrito_path(@current_carrito)
       return
@@ -60,9 +60,9 @@ class LineaFacturasController < ApplicationController
     redirect_to carrito_path(@current_carrito)
   end
   def reduce_quantity
-    if @linea_factura.unidades > 1
-      @linea_factura.unidades -=1
-    end
+    #Encontramos la linea
+    @linea_factura = @current_carrito.linea_facturas.find(params[:id])
+    @linea_factura.unidades -=1
     @linea_factura.save
   end
   def destroy

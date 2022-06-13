@@ -8,6 +8,7 @@ class LineaFactura < ApplicationRecord
   #Calculamos su precio linea, que es el
   # unitario * unidades
   before_save :set_precio_linea
+  after_save :unidades?
 
 
   #Vemos que el producto tenga stock
@@ -35,6 +36,11 @@ class LineaFactura < ApplicationRecord
 
 
   private
+  def unidades?
+    if self.unidades <= 0
+      self.destroy
+    end
+  end
 
   #En los getter llamamos a los metodos que se encargan
   # de asignarle su valor

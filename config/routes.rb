@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   #Que tenga su path tambien
   post "linea_facturas" => "linea_facturas#create"
   get 'linea_facturas/:id/add' => "linea_facturas#add_quantity", as: "linea_factura_add"
-  post 'linea_facturas/:id/reduce' => "linea_facturas#reduce_quantity", as: "linea_factura_reduce"
+  get 'linea_facturas/:id/reduce' => "linea_facturas#reduce_quantity", as: "linea_factura_reduce"
   get 'linea_facturas/:id' => "linea_facturas#show", as: "linea_factura"
   delete 'linea_facturas/:id' => "linea_facturas#destroy"
   root 'bienvenido#index'
