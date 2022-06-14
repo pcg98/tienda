@@ -4,8 +4,8 @@ class Usuario < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :rol
-  has_many :tarjetums, dependent: :destroy
-  has_many :carritos
+  has_many :cards, dependent: :destroy
+  has_many :carritos, dependent: :destroy
   has_many :pedidos
 
   validates :password_confirmation, presence: true

@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-lg-7 mx-auto">
+    <div class="bg-white rounded-lg shadow-sm p-5">
+
+      <!-- Credit card form content -->
+      <div class="tab-content">
+
+        <!-- credit card info-->
+        <div id="nav-tab-card" class="tab-pane fade show active">
+          <%# Mensaje de error %>
+          <% flash.each do |key, value| %>
+            <div class="<%= flash_class(key) %>">
+              <%= value %>
+            </div>
+          <% end %>
+          <%= form_for @card do |form| %>
+            <div class="form-group">
+              <%= form.label :titular, "Titular de la tarjeta" %>
+              <%= form.text_field :titular, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :iban, "IBAN de la tarjeta" %>
+              <div class="input-group">
+                <%= form.text_field :iban, class: "form-control", placeholder: "Inserte su numero de tarjeta" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <%= form.label "Caducidad de la tarjeta" %>
+                  <div class="input-group">
+                    <%= form.number_field :mes_caducidad, class: "form-control", placeholder: "MM" %>
+                    <%= form.number_field :year_caducidad, class: "form-control", placeholder: "YY" %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group mb-4">
+                  <%= form.label :cvv, "CVV de la tarjeta"  %>
+                  <%= form.text_field :cvv, class: "form-control" %>
+                </div>
+              </div>
+
+            </div>
+            <%= form.submit "Confirmar",  class: "subscribe btn btn-primary btn-block rounded-pill shadow-sm" %>
+          <% end %>
+        </div>
+        <!-- End -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_08_113039) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_14_115607) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_113039) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "iban"
+    t.integer "cvv"
+    t.integer "mes_caducidad"
+    t.integer "year_caducidad"
+    t.string "titular"
+    t.integer "usuario_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["usuario_id"], name: "index_cards_on_usuario_id"
   end
 
   create_table "carritos", force: :cascade do |t|
@@ -100,18 +112,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_113039) do
     t.index ["producto_id"], name: "index_sizes_on_producto_id"
   end
 
-  create_table "tarjeta", force: :cascade do |t|
-    t.string "iban"
-    t.integer "cvv"
-    t.integer "mes_caducidad"
-    t.integer "year_caducidad"
-    t.string "titular"
-    t.integer "usuario_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["usuario_id"], name: "index_tarjeta_on_usuario_id"
-  end
-
   create_table "usuarios", force: :cascade do |t|
     t.string "telefono"
     t.string "nombre"
@@ -132,6 +132,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_113039) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cards", "usuarios"
   add_foreign_key "carritos", "usuarios"
   add_foreign_key "linea_facturas", "carritos"
   add_foreign_key "linea_facturas", "productos"
@@ -139,6 +140,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_113039) do
   add_foreign_key "pedidos", "carritos"
   add_foreign_key "pedidos", "usuarios"
   add_foreign_key "sizes", "productos"
-  add_foreign_key "tarjeta", "usuarios"
   add_foreign_key "usuarios", "rols"
 end
