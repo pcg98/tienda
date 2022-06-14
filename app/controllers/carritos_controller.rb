@@ -1,4 +1,5 @@
 class CarritosController < ApplicationController
+  load_and_authorize_resource
 
   def show
     #Cojo el carrito

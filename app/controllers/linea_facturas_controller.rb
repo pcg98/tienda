@@ -1,5 +1,5 @@
 class LineaFacturasController < ApplicationController
-
+  load_and_authorize_resource
   after_action :set_linea_factura
 
   def create

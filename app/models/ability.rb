@@ -19,15 +19,19 @@ class Ability
   def cliente_permisos(usuario)
     #Leer todos los productos
     can :read, Producto, :all
-    #Manejar su carrito
+    #Leer todas las tallas
+    can :read, Size, :all
+    #Manejar su carrito y tarjeta
+    can :manage, Card, { usuario_id: usuario.id}
     can :manage, Carrito, { usuario_id: usuario.id}
-    #Ver info y actualizar de su usuario
-    can [:read, :update, :destroy], Usuario, { id: usuario.id }
+    #Ver su pedido
+    can :read, Pedido, { usuario_id: usuario.id}
+    #Manejar su usuario
+    can :manage, Usuario, { id: usuario.id }
     can [:manage], LineaFactura
   end
   #Visitantes
   def visitante_permisos(usuario)
-    #
     can :read, Producto, :all
     can :create, Usuario, :all
   end

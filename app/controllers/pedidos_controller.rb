@@ -1,5 +1,5 @@
 class PedidosController < ApplicationController
-
+  load_and_authorize_resource
   def create
     if (@current_carrito.linea_facturas.empty?)
       flash[:error] = "Carrito vacio"

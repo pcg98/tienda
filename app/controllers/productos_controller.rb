@@ -1,5 +1,6 @@
 class ProductosController < ApplicationController
-
+  #Esto es para que el cancan mire si tenemos los permisos
+  load_and_authorize_resource
   layout "productos_layout"
   # GET /productos
   def index
@@ -45,8 +46,7 @@ class ProductosController < ApplicationController
   def destroy
     @producto = Producto.find(params[:id])
     @producto.destroy
-
-    redirect_to root_path, status: :see_other
+    redirect_to productos_path, status: :see_other
   end
 
   private

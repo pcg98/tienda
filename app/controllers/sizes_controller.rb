@@ -1,9 +1,16 @@
 class SizesController < ApplicationController
+  load_and_authorize_resource
+
   def create
     #Pillamos producto
     @producto = Producto.find(params[:producto_id])
-    #En ese producto, en las tallas creamos la nueva
-    @size = @producto.sizes.create(size_params)
+    if(@size.stock < 0)
+      flash[:error] = "No puedes poner stock de menos de 0"
+    else
+      #En ese producto, en las tallas creamos la nueva
+      @size = @producto.sizes.create(size_params)
+      flash[:success] = "Stock cambiado correctamente"
+    end
     redirect_to producto_path(@producto)
   end
 
@@ -24,6 +31,7 @@ class SizesController < ApplicationController
     puts params.as_json, 'Prueba'
     if(new_stock < 0)
       flash[:error] = "No puedes poner stock de menos de 0"
+      redirect_to producto_path(@size.producto)
       return
     end
     #Si es para restar...
