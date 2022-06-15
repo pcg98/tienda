@@ -10,8 +10,8 @@
           <tr>
             <th style="width:60%">Producto</th>
             <th style="width:12%">Precio</th>
-            <th style="width:10%">Quantity</th>
-            <th style="width:10%">talla</th>
+            <th style="width:10%">Talla</th>
+            <th style="width:10%">Unidades</th>
             <th style="width:16%"></th>
           </tr>
           </thead>
@@ -42,9 +42,9 @@
                 <div class="text-right">
                   <%= link_to '<i class="bi bi-plus-circle"></i>'.html_safe, linea_factura_add_path(linea_factura), class: "btn btn-white border-secondary bg-white btn-md mb-2" %>
                   <%= link_to '<i class="bi bi-dash-circle"></i>'.html_safe, linea_factura_reduce_path(linea_factura), class: "btn btn-white border-secondary bg-white btn-md mb-2" %>
-                  <%= button_to linea_factura, method: :delete, class: "btn btn-white border-secondary bg-white btn-md mb-2",
-                                form: {data: {turbo_confirm: 'Are you sure?'}} do %>
-                    <i class="bi bi-trash"></i>
+                  <%= button_to linea_factura, method: :delete, class: "btn btn-danger btn-md mb-2",
+                                form: {data: {turbo_confirm: '¿Desea retirarlo del carrito?'}} do %>
+                    <i class="bi bi-trash" ></i>
                   <% end %>
                 </div>
               </td>

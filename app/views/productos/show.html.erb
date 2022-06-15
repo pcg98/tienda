@@ -23,15 +23,12 @@
           </div>
         <% end %>
         <p class="lead">Categoria: <%= @producto.categoria %>, Sexo: <%= @producto.sexo %></p>
-        <%# Mostramos las tallas comprobando que hay stock %>
-        <p class="lead">
-        </p>
         <% if usuario_signed_in? %>
+          <%= form_for @linea_factura do |f|%>
           <div class="d-flex">
-            <%= form_for @linea_factura do |f|%>
               <%= f.hidden_field :producto_id, :value => @producto.id %>
               <%= f.number_field :unidades, :value => 1, :min =>  1, class: "form-control text-center me-3", style: "max-width: 5rem" %>
-              <%= f.select :size_id, @producto.sizes.map { |s| [s.talla, s.id]}, {}, class: "form-select text-center", style: "max-width: 5rem" %>
+              <%= f.select :size_id, @producto.sizes.map { |s| [s.talla, s.id]}, {}, class: "form-control form-select text-center", style: "max-width: 5rem" %>
               <%= button_tag :class => 'btn btn-outline-dark flex-shrink-0' do %>
                 <i class="bi-cart-fill me-1"></i>
                 Añadir al carrito
@@ -46,17 +43,17 @@
 <div>
   <ul>
     <% if can? :destroy, Producto %>
-      <li>
-        <%= link_to "Edit", edit_producto_path(@producto) %>
-      </li>
       <%= render "sizes/form" %>
-      <%# Esto es para borrar las tallas ya existentes %>
+      <%# Esto es para editar las tallas ya existentes %>
       <%= render @producto.sizes %>
     <% end %>
-    <li>
-      <%= button_to 'Destroy', @producto, method: :delete,
-                    form: {data: {turbo_confirm: 'Are you sure?'}} %>
-    </li>
+      <%= link_to edit_producto_path(@producto), class: "btn btn-outline-success mt-auto" do %>
+        <i class="bi bi-pencil"></i> Editar producto
+      <% end %>
+      <%= button_to @producto, method: :delete, class: "btn btn-outline-danger mt-auto",
+                    form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+        <i class="bi bi-trash-fill"></i> Borrar producto
+      <% end %>
   </ul>
 </div>
 <!-- Related items section-->
