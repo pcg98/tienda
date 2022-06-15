@@ -27,6 +27,34 @@
           </ul>
         </li>
       </ul>
+      <div class = "dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 1.05rem;"></i></a>
+        <div class="dropdown-menu">
+            <% if usuario_signed_in? %>
+              Registrado como <%= current_usuario.nombre %>.
+              <%= link_to "Editar perfil", edit_usuario_registration_path, class: "dropdown-item" %>
+              <%= link_to "Ver pedidos", pedidos_path, class: "dropdown-item" %>
+              <%= button_to "Desconectarse", destroy_usuario_session_path, method: :delete, class: "dropdown-item btn btn-danger" %>
+            <% else %>
+              <%= form_for("usuario", :url => usuario_session_path, html: {class: 'px-2 py-3'}) do |f| %>
+                <div class="form-group">
+                  <%= f.label :email %>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email" %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :password %>
+                  <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "Password" %>
+                </div>
+                <%= f.submit "Iniciar sesion", class: "btn btn-primary" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Registrarse", new_usuario_registration_path, class: "dropdown-item" %> o
+              <%= link_to "Iniciar sesion", new_usuario_session_path, class: "dropdown-item" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
       <% if usuario_signed_in? %>
         <%= button_to carrito_path(@current_carrito), method: :get, class: "btn btn-outline-dark" do %>
           <i class="bi-cart-fill me-1"></i>
