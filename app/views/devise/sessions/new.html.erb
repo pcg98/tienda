@@ -1,23 +1,27 @@
+<br>
 <div class = "text-center">
-<main class="form-signin w-25 m-auto">
-
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <h1 class="h3 mb-3 fw-normal">Inicie sesion</h1>
-    <div class="form-floating">
-      <%= f.email_field "email", class:"form-control", id:"floatingInput", placeholder:"name@example.com" %>
-      <%= f.label "Email", for: "floatingInput" %>
-    </div>
-    <div class="form-floating">
-      <%= f.password_field "password", class:"form-control", id:"floatingPassword", placeholder:"Password" %>
-      <%= f.label "Password", for: "floatingPassword" %>
-    </div>
-      <% if devise_mapping.rememberable? %>
-        <div class="checkbox mb-3">
-          <%= f.check_box :remember_me %>
-          <%= f.label :"Recuerdame" %>
+    <main class="form-signin w-25 m-auto">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <h1 class="h3 mb-3 fw-normal">Inicie sesion</h1>
+        <div class="form-floating">
+          <%= f.email_field "email", class:"form-control", id:"floatingInput", placeholder:"name@example.com" %>
+          <%= f.label "Email", for: "floatingInput" %>
         </div>
+        <br>
+        <div class="form-floating">
+          <%= f.password_field "password", class:"form-control", id:"floatingPassword", placeholder:"Password" %>
+          <%= f.label "Password", for: "floatingPassword" %>
+        </div>
+        <br>
+          <% if devise_mapping.rememberable? %>
+            <div class="checkbox mb-3">
+              <%= f.check_box :remember_me %>
+              <%= f.label :"Recuerdame" %>
+            </div>
+          <% end %>
+        <br>
+        <%= f.button "Iniciar sesion", class: "w-100 btn btn-lg btn-primary"  %>
       <% end %>
-    <%= f.button "Iniciar sesion", class: "w-100 btn btn-lg btn-primary"  %>
-  <% end %>
-</main>
+    </main>
 </div>
+<br>

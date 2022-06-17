@@ -1,9 +1,9 @@
 <%= form_for @producto, class:"form-inline", role:"form" do |form| %>
 
   <%# nombre %>
-  <div class="form-group">
-    <%= form.label :nombre %>
-    <%= form.text_field :nombre %>
+  <div class="mb-3">
+    <%= form.label :nombre, class:"form-label" %>
+    <%= form.text_field :nombre,class:"form-control",id:"inputNombre"  %>
     <% producto.errors.full_messages_for(:nombre).each do
       |message| %>
       <div><%= message %></div>
@@ -11,10 +11,9 @@
   </div>
 
   <%# marca %>
-  <div class="form-group">
-    <%= form.label :marca, class:"sr-only" %>
-    <br>
-    <%= form.text_field :marca %>
+  <div class="mb-3">
+    <%= form.label :marca, class:"form-label" %>
+    <%= form.text_field :nombre,class:"form-control",id:"inputNombre"  %>
     <% producto.errors.full_messages_for(:marca).each do
     |message| %>
       <div><%= message %></div>
@@ -22,9 +21,9 @@
   </div>
 
   <%# precio %>
-  <div>
-    <%= form.label :precio %>
-    <%= form.text_field :precio %>
+  <div class="mb-3">
+    <%= form.label :precio, class:"form-label" %>
+    <%= form.text_field :precio,class:"form-control",id:"inputPrecio" %>
     <% producto.errors.full_messages_for(:precio).each do
     |message| %>
       <div><%= message %></div>
@@ -33,22 +32,22 @@
 
 
   <%# categoria %>
-  <div>
-    <%= form.label :categoria  %>
-    <%= form.select :categoria, ['Zapatillas','Sudaderas','Camisetas','Otros'] %>
+  <div class="mb-3">
+    <%= form.label :categoria, class:"form-label"  %>
+    <%= form.select :categoria, ['Zapatillas','Sudaderas','Camisetas','Otros'], {}, {class:"form-select",id:"inputCategoria"} %>
   </div>
 
   <%# sexo %>
-  <div>
-    <%= form.label :sexo %>
-    <%= form.select :sexo, ['M','H','N'] %>
+  <div class="mb-3">
+    <%= form.label :sexo, class:"form-label" %>
+    <%= form.select :sexo, ['M','H','N'] , {}, {class:"form-select",id:"inputSexo"} %>
   </div>
 
 
-  <div>
-    <%= form.file_field :image %>
+  <div class="mb-3">
+    <%= form.file_field :image,class:"form-control" %>
   </div>
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit "Añadir producto", class:"btn btn-primary" %>
   </div>
 <% end %>
