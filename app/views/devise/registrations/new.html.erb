@@ -1,43 +1,41 @@
-<h2>Sign up</h2>
+<div class = "text-center">
+  <main class="form-signin w-25 m-auto">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <h1 class="h3 mb-3 fw-normal">Registrese</h1>
+      <div class="form-floating">
+        <%= f.email_field "email", class:"form-control", id:"floatingInput", placeholder:"name@example.com" %>
+        <%= f.label "Email", for: "floatingInput" %>
+      </div>
+      <div class="form-floating">
+        <%= f.password_field "password", class:"form-control", id:"floatingPassword", placeholder:"Password" %>
+        <%= f.label "Password", for: "floatingPassword" %>
+      </div>
+      <div class="form-floating">
+        <%= f.password_field :password_confirmation, class:"form-control", id:"floatingPasswordConfirmation", placeholder:"ConfirmarPassword", autocomplete: "new-password" %>
+        <%= f.label :password_confirmation, for: "floatingPasswordConfirmation" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="form-floating">
+        <%= f.text_field :nombre, class:"form-control", id:"floatingNombre", placeholder:"Nombre", autocomplete: "nombre" %>
+        <%= f.label :nombre, for:"floatingNombre" %>
+      </div>
+      <div class="form-floating">
+        <%= f.text_field :apellidos, class:"form-control", id:"floatingApellidos", placeholder:"Apellidos", autocomplete: "apellidos" %>
+        <%= f.label :apellidos, for:"floatingApellidos" %>
+      </div>
+      <div class="form-floating">
+        <%= f.label :telefono, for:"floatingTelefono"%>
+        <%= f.telephone_field :telefono, class:"form-control", id:"floatingTelefono", placeholder:"Telefono", autocomplete: "telephone" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :apellidos %><br />
-    <%= f.text_field :apellidos %>
-  </div>
-  <div class="field">
-    <%= f.label :telefono %><br />
-    <%= f.telephone_field :telefono %>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit "Registrarse" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+      <% if devise_mapping.rememberable? %>
+        <div class="checkbox mb-3">
+          <%= f.check_box :remember_me %>
+          <%= f.label :"Recuerdame" %>
+        </div>
+      <% end %>
+      <%= f.submit "Registrarse", class: "w-100 btn btn-lg btn-primary"  %>
+    <% end %>
+  </main>
+</div>
