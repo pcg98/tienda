@@ -19,11 +19,12 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
+    <header>
+      <%= render 'layouts/header' %>
+    </header>
     <%= yield %>
     <hr>
-    <footer></footer><div class="container"><div align="center">Desarrollado por Pablo Cruz</div></div>
-
     <br><br>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

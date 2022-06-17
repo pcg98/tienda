@@ -15,12 +15,14 @@
   <%= favicon_link_tag 'shopping-cart.png' %>
 </head>
 
-<body>
-<%= render 'layouts/header' %>
-<%= yield %>
-<hr>
-<footer></footer><div class="container"><div align="center">Desarrollado por Pablo Cruz</div></div>
+  <body>
+    <header>
+      <%= render 'layouts/header' %>
+    </header>
+  <%= yield %>
+    <hr>
+    <footer><div class="container"><div align="center">Desarrollado por Pablo Cruz</div></div></footer>
 
-<br><br>
-</body>
+    <br><br>
+  </body>
 </html>

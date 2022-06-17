@@ -17,23 +17,13 @@
   </head>
 
   <body>
-  <% if usuario_signed_in? %>
-    Registrado como <%= current_usuario.nombre %>.
-    <%= link_to "Editar perfil", edit_usuario_registration_path %>
-    <%= button_to "Desconectarse", destroy_usuario_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Registrarse", new_usuario_registration_path %>
-    <%= link_to "Iniciar sesion", new_usuario_session_path %>
-  <% end %>
-  <%= link_to "Home", root_path %>
-  <% flash.each do |nombre, msg| %>
-    <%= content_tag :div, msg, id: "flash_#{nombre}" %>
-  <% end %>
-
+  <header>
+    <%= render 'layouts/header' %>
+  </header>
   <%= yield %>
   <hr>
-  <footer></footer><div class="container"><div align="center">Desarrollado por Pablo Cruz</div></div>
-
   <br><br>
+  <%= render 'layouts/footer' %>
+
   </body>
 </html>

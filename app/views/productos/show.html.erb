@@ -1,5 +1,3 @@
-<%= link_to "Back", productos_path %>
-
 <!-- Product section-->
 <section class="py-5">
   <div class="container px-4 px-lg-5 my-5">
@@ -34,28 +32,37 @@
                 Añadir al carrito
                 <% end %>
             <% end %>
+          <% else %>
+            <div class = "alert alert-warning">
+              <p class="lead">Inicie sesion para ver las opciones del producto</p>
+            </div>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 </section>
-<div>
-  <ul>
-    <% if can? :destroy, Producto %>
-      <%= render "sizes/form" %>
-      <%# Esto es para editar las tallas ya existentes %>
-      <%= render @producto.sizes %>
-    <% end %>
-      <%= link_to edit_producto_path(@producto), class: "btn btn-outline-success mt-auto" do %>
-        <i class="bi bi-pencil"></i> Editar producto
-      <% end %>
-      <%= button_to @producto, method: :delete, class: "btn btn-outline-danger mt-auto",
-                    form: {data: {turbo_confirm: 'Are you sure?'}} do %>
-        <i class="bi bi-trash-fill"></i> Borrar producto
-      <% end %>
-  </ul>
-</div>
+  <% if can? :destroy, Producto %>
+    <%= render "sizes/form" %>
+    <%# Esto es para editar las tallas ya existentes %>
+    <%= render @producto.sizes %>
+    <div clas ="container">
+      <div class = "row justify-content-center">
+        <div class = "col-2">
+          <%= link_to edit_producto_path(@producto), class: "btn btn-outline-success mt-auto" do %>
+            <i class="bi bi-pencil"></i> Editar producto
+          <% end %>
+        </div>
+        <div class="col-2">
+          <%= button_to @producto, method: :delete, class: "btn btn-outline-danger mt-auto",
+                        form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+            <i class="bi bi-trash-fill"></i> Borrar producto
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
 <!-- Related items section-->
 <section class="py-5 bg-light">
   <div class="container px-4 px-lg-5 mt-5">

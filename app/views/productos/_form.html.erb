@@ -1,9 +1,8 @@
-<%= form_for @producto do |form| %>
+<%= form_for @producto, class:"form-inline", role:"form" do |form| %>
 
   <%# nombre %>
-  <div>
+  <div class="form-group">
     <%= form.label :nombre %>
-    <br>
     <%= form.text_field :nombre %>
     <% producto.errors.full_messages_for(:nombre).each do
       |message| %>
@@ -12,8 +11,8 @@
   </div>
 
   <%# marca %>
-  <div>
-    <%= form.label :marca %>
+  <div class="form-group">
+    <%= form.label :marca, class:"sr-only" %>
     <br>
     <%= form.text_field :marca %>
     <% producto.errors.full_messages_for(:marca).each do
